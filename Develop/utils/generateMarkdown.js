@@ -54,6 +54,10 @@ function generateMarkdown(data) {
   return template = `
   # ${data.title}
 
+  [![License: ${licenseProject}](${license.renderLicenseBadge(
+    licenseProject
+  )})](${license.renderLicenseLink(licenseProject)})
+
   ## Description
 
   ${data.description}
@@ -85,7 +89,7 @@ function generateMarkdown(data) {
 
   ## License
 
-  ${data.license}
+  ${license.renderLicenseText(licenseProject)}
 
   ---
 
@@ -100,6 +104,11 @@ function generateMarkdown(data) {
   ## Tests
 
   ${data.tests}
+  
+  ## Questions
+  
+  [GitHub profile](http://github.com/${GithubUser})
+  [Contact Me - Email](mailto:${emailUser})
   `;
 }
 

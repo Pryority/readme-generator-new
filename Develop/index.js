@@ -58,6 +58,14 @@ const questions = [
         type: 'input',
         name: 'license',
         message: "Enter the license used for this project to let other developers know what they can and cannot do with your project. If you need help choosing a license, refer to https://choosealicense.com.",
+        choices: [
+            "Apache 2.0",
+            "ISC",
+            "MIT",
+            "Mozilla 2.0",
+            "GNU GPLv3",
+            "Unlicense",
+        ],
         validate: answer => {
             if (!answer) {
                 return "Enter the license used for this project to let other developers know what they can and cannot do with your project. If you need help choosing a license, refer to https://choosealicense.com."
