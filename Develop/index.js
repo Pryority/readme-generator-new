@@ -1,6 +1,7 @@
 // TODO: Include packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer');
+const generateMarkdown = require('generateMarkdown');
 
 // TODO: Create an array of questions for user input
 const questions = [
@@ -104,68 +105,22 @@ const questions = [
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-    const { title, description, install, usage, license, contribute, credit, test } = questions;
-    return inquirer.prompt(`
-    # <Your-Project-Title>
-
-    ## Description
-
-    ${data.description}
-
-    ## Table of Contents (Optional)
-
-    If your README is long, add a table of contents to make it easy for users to find what they need.
-
-    - [Installation](#installation)
-    - [Usage](#usage)
-    - [Credits](#credits)
-    - [License](#license)
-
-    ## Installation
-
-    ${data.install}
-
-    ## Usage
-
-    ${data.usage}
-
-    To add a screenshot, create an assets / images folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
-
-    // md
-    // ![alt text](assets / images / screenshot.png)
-    
-
-    ## Credits
-
-    ${data.credit}
-
-    ## License
-
-    ${data.license}
-
-    ---
-
-    ## Badges
-
-    ![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
-
-    ## How to Contribute
-
-    ${data.contribute}
-
-    ## Tests
-
-    ${data.tests}
-    `);
+    fs.writeFile(`/${fileName.toLowerCase().split(' ').join('')}.md`, data, err => {
+        if (err) {
+            console.log(err);
+        }
+        console.log('Your readme file has been generated.')
+    });
 }
 
 // TODO: Create a function to initialize app
 function init() {
-    questions.then(data => {
-        writeToFile('./README.md', data, err => {
-            throw err;
-        })
-    })
+    const { title, description, install, usage, license, contribute, credit, test } = questions;
+
+    inquirer.prompt(questions => {
+        writeToFile('./README.md', template);
+        generateMarkdown();
+    });
 }
 
 // Function call to initialize app
